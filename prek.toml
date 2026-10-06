@@ -1,0 +1,26 @@
+# Git hooks, run by prek (https://prek.j178.dev). Set up once per clone with `prek install`.
+# Run everything by hand with `prek run --all-files`.
+#:schema https://www.schemastore.org/prek.json
+
+[[repos]]
+repo = "builtin"
+hooks = [
+  { id = "trailing-whitespace", args = ["--markdown-linebreak-ext=md"] },
+  { id = "end-of-file-fixer" },
+  { id = "mixed-line-ending", args = ["--fix=lf"] },
+  { id = "check-merge-conflict" },
+  { id = "check-case-conflict" },
+  { id = "check-added-large-files" },
+  { id = "check-json" },
+  { id = "check-yaml", args = ["--allow-multiple-documents"] },  # pnpm-lock.yaml is multi-document
+  { id = "detect-private-key" },
+]
+
+[[repos]]
+repo = "local"
+hooks = [
+  # Formats staged files; .prettierignore still applies.
+  { id = "prettier", name = "prettier", language = "system", entry = "pnpm exec prettier --write --ignore-unknown", types = ["text"] },
+  # Whole-project check (regenerates Worker types first), once per commit that touches TypeScript.
+  { id = "typecheck", name = "typecheck", language = "system", entry = "pnpm run typecheck", types_or = ["ts", "tsx"], pass_filenames = false },
+]

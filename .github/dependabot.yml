@@ -1,0 +1,10 @@
+version: 2
+updates:
+  # Keep workflow actions current. npm updates are left out: Dependabot's pnpm support may lag pnpm 12's lockfile format.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns: ["*"]

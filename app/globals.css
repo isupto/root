@@ -1,0 +1,173 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (@media (prefers-color-scheme: dark));
+
+:root {
+  color-scheme: light dark;
+
+  --paper: #f5f4f8;
+  --paper-raised: #ffffff;
+  --ink: #1e1a2e;
+  --ink-soft: #5b5670;
+  --line: #dcd8e6;
+  --violet: #6d3fd6;
+  --violet-soft: #ece5fb;
+  --up: #1e9e5a;
+  --busy: #d98a00;
+  --down: #d6334a;
+  --info: #2764e7;
+  --idle: #9a95ab;
+
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--paper-raised);
+  --card-foreground: var(--ink);
+  --popover: var(--paper-raised);
+  --popover-foreground: var(--ink);
+  --primary: var(--violet);
+  --primary-foreground: #ffffff;
+  --secondary: #ebe8f2;
+  --secondary-foreground: var(--ink);
+  --muted: #ebe8f2;
+  --muted-foreground: var(--ink-soft);
+  --accent: var(--violet-soft);
+  --accent-foreground: var(--ink);
+  --destructive: var(--down);
+  --border: var(--line);
+  --input: var(--line);
+  --ring: var(--violet);
+  --radius: 0.75rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #16131f;
+    --paper-raised: #201c2c;
+    --ink: #edeaf6;
+    --ink-soft: #a9a3bd;
+    --line: #342e45;
+    --violet: #a987ff;
+    --violet-soft: #2c2342;
+    --up: #3ccf7f;
+    --busy: #f0a92a;
+    --down: #ff5d72;
+    --info: #6b9bff;
+    --idle: #6f6985;
+
+    --primary-foreground: #16131f;
+    --secondary: #2a2538;
+    --muted: #2a2538;
+  }
+}
+
+@theme inline {
+  --font-sans: var(--font-recursive), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-recursive), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-recursive), ui-monospace, "SFMono-Regular", monospace;
+
+  --color-paper: var(--paper);
+  --color-paper-raised: var(--paper-raised);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-line: var(--line);
+  --color-violet: var(--violet);
+  --color-violet-soft: var(--violet-soft);
+  --color-up: var(--up);
+  --color-busy: var(--busy);
+  --color-down: var(--down);
+  --color-info: var(--info);
+  --color-idle: var(--idle);
+
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.5);
+  --radius-2xl: calc(var(--radius) * 2);
+}
+
+/* Recursive's variable axes give one family three voices. */
+@utility voice-casual {
+  font-variation-settings:
+    "CASL" 1,
+    "MONO" 0,
+    "CRSV" 1;
+}
+@utility voice-linear {
+  font-variation-settings:
+    "CASL" 0,
+    "MONO" 0,
+    "CRSV" 0.5;
+}
+@utility voice-mono {
+  font-variation-settings:
+    "CASL" 0,
+    "MONO" 1,
+    "CRSV" 0;
+  letter-spacing: -0.01em;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/60;
+  }
+  html {
+    @apply font-sans voice-linear;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply voice-casual;
+    text-wrap: balance;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  :focus-visible {
+    outline-width: 2px;
+    outline-style: solid;
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: var(--violet-soft);
+    color: var(--ink);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
